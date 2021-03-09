@@ -16,7 +16,4 @@ public interface SelenoidConfig extends Config {
 
     @Key("remote.url")
     String remoteUrl();
-
-    @Key("video")
-    String videoStore();
 }
