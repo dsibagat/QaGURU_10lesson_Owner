@@ -1,3 +1,9 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
 plugins {
     id "java-library"
     id "application"
@@ -8,9 +14,11 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.13.8",
-    selenideVersion = "5.18.0",
+ext {
+    allureVersion = "2.13.7"
+    selenideVersion = "5.16.2"
     junitVersion = "5.7.0"
+}
 
 allure {
     version = "${allureVersion}"
@@ -22,18 +30,21 @@ allure {
 }
 
 dependencies {
-    testImplementation (
-            "com.codeborne:selenide:$selenideVersion",
-            "io.qameta.allure:allure-selenide:$allureVersion",
-            "com.github.javafaker:javafaker:1.0.2",
-            "org.aspectj:aspectjweaver:1.9.5",
-            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
-            "org.junit.jupiter:junit-jupiter-params:$junitVersion")
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.aspectj:aspectjweaver:1.9.5"
+    testImplementation "com.codeborne:selenide:${selenideVersion}"
+    testImplementation "io.qameta.allure:allure-selenide:${allureVersion}"
+    testImplementation "org.aeonbits.owner:owner:1.0.12"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+tasks.withType(Test) {
+    systemProperties = System.properties
 }
 
 test {
