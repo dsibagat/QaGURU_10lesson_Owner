@@ -14,16 +14,10 @@ public class SimpleTest {
     void selenideSearchTest() {
         Configuration.remote = ConfigHelper.getWebdriverRemote();
 
-        String searchSite = ConfigHelper.getSearchSite();
-        String searchItem = ConfigHelper.getSearchItem();
-        String searchResult = ConfigHelper.getSearchResult();
-        String password = ConfigHelper.getPassword();
-        System.out.println(password);
+        open("https://www.google.com");
 
-        open(searchSite);
+        $(byName("q")).setValue("Selenide").pressEnter();
 
-        $(byName("q")).setValue(searchItem).pressEnter();
-
-        $("html").shouldHave(text(searchResult));
+        $("html").shouldHave(text("Selenide: лаконичные и стабильные UI тесты на Java"));
     }
 }
