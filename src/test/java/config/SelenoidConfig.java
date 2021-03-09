@@ -19,7 +19,4 @@ public interface SelenoidConfig extends Config {
 
     @Key("video")
     String videoStore();
-
-    @Key("video.storage")
-    String videoStorage();
 }
