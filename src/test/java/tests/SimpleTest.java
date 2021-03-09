@@ -1,7 +1,8 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import config.ConfigHelper;
+import config.SelenoidConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -11,8 +12,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class SimpleTest {
     @Test
-    void selenideSearchTest() {
-        Configuration.remote = ConfigHelper.getWebdriverRemote();
+    public void selenideSearchTest() {
+        final SelenoidConfig config = ConfigFactory.create(SelenoidConfig.class, System.getProperties());
+        Configuration.browser = config.browser();
 
         open("https://www.google.com");
 
