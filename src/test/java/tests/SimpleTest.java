@@ -16,7 +16,11 @@ public class SimpleTest {
         final SelenoidConfig config = ConfigFactory.create(SelenoidConfig.class, System.getProperties());
         Configuration.browser = config.browser();
         Configuration.browserVersion = config.browserVersion();
-        Configuration.remote = config.remoteUrl();
+
+        if (config.remoteUrl() != null) {
+            Configuration.remote = config.remoteUrl();
+        }
+
 
         open("https://www.google.com");
 
